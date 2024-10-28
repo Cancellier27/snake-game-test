@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Test GAME</title>
+    <title>Snake GAME</title>
     <style>
       * {
         margin: 0;
@@ -9,9 +9,18 @@
         box-sizing: border-box;
       }
 
+      html {
+        overflow: hidden;
+      }
+
       body {
         height: 100vh;
         width: 100%;
+
+        overflow: hidden;
+        position: relative;
+        margin: 0;
+        padding: 0;
       }
 
       .game-container {
@@ -63,7 +72,14 @@
         display: none;
       }
 
-      @media screen and (width <= 450px) {
+      h1 {
+        position: absolute;
+        top: 20px;
+        right: 65px;
+        color: orangered;
+      }
+
+      @media screen and (width >= 450px) {
         .game-tags {
           transform: scale(3);
         }
@@ -74,11 +90,13 @@
     <div class="game-container">
       <div class="game-tags">
         <canvas id="canvas" width="300" height="200"></canvas>
+        <h1 class="title">Snake Game</h1>
         <div class="score-container"><p class="score-text">0</p></div>
         <button class="start-button" onclick="startGame()">Start Game!</button>
         <button class="end-button" onclick="restart()">GAME OVER!</button>
       </div>
     </div>
+    <audio class="music-audio" src="./songs/music.mp3" loop></audio>
 
     <script src="player.js"></script>
     <script src="enemies.js"></script>

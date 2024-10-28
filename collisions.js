@@ -17,6 +17,8 @@ class Collision {
           pp[0]+10 >= ep[0] && pp[0]+10 <= ep[0]+10 && pp[1]+10 >= ep[1] && pp[1]+10 <= ep[1]+10
         ) {
           // Colliding!
+          let audioPoint = new Audio("./songs/point-collection.mp3")
+          audioPoint.play()
           this.player.size++
           enemy.isDestroyed = true
         } 
@@ -28,9 +30,14 @@ class Collision {
     let posCheck = this.player.xyPrevLocation.slice(10, this.player.size * this.player.posBehind)
     let plaPorString = `${this.player.x},${this.player.y}`
          
-    if(posCheck.includes(plaPorString)) {
+    if(posCheck.includes(plaPorString) && this.player.isRunning) {
       this.player.isRunning = false
       document.querySelector(".end-button").style.display = "block"
+      console.log("test")
+      audioStart.pause()
+      audioStart.currentTime = 0
+      let audioOver = new Audio("./songs/game-over.mp3")
+      audioOver.play()
     }
   }
 

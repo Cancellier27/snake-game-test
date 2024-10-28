@@ -7,6 +7,8 @@ const directions = []
 const canvasX = 300
 const canvasY = 200
 
+const audioStart = document.querySelector(".music-audio")
+
 let timeout1
 let timeout2
 
@@ -159,9 +161,11 @@ function IncreaseDifficulty() {
 }
 
 function startGame() {
+  audioStart.play()
   start(60)
   IncreaseDifficulty()
   document.querySelector(".start-button").style.display = "none"
+  document.querySelector(".title").style.display = "none"
   player1.isRunning = true
 }
 
@@ -169,13 +173,18 @@ function restart() {
   cancelAnimationFrame(animationFrame)
   clearTimeout(timeout1)
   clearTimeout(timeout2)
+  ctx.clearRect(0, 0, canvasX, canvasY)
   player1.x = 245
   player1.y = 150
   player1.size = 1
   player1.speed = 1
   document.querySelector(".end-button").style.display = "none"
   document.querySelector(".start-button").style.display = "block"
+  document.querySelector(".title").style.display = "block"
+  audioStart.play()
 }
+
+// touch events -------------------------------------
 
 document.addEventListener("touchstart", handleTouchStart, false)
 document.addEventListener("touchmove", handleTouchMove, false)
@@ -224,4 +233,15 @@ function handleTouchMove(evt) {
   /* reset values */
   xDown = null
   yDown = null
+}
+
+
+window.addEventListener("scroll", preventMotion, false);
+window.addEventListener("touchmove", preventMotion, false);
+
+function preventMotion(event)
+{
+    window.scrollTo(0, 0);
+    event.preventDefault();
+    event.stopPropagation();
 }
