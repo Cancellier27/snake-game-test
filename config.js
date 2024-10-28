@@ -2,7 +2,7 @@ const canvas = document.querySelector("#canvas")
 const ctx = canvas.getContext("2d")
 let animationFrame
 
-const directions = []
+let directions = []
 
 const canvasX = 300
 const canvasY = 200
@@ -219,15 +219,15 @@ function handleTouchMove(evt) {
   if (Math.abs(xDiff) > Math.abs(yDiff)) {
     /*most significant*/
     if (xDiff > 0) {
-      player1.lastDirection = "left"
+      directions = ["left"]
     } else {
-      player1.lastDirection = "right"
+      directions = ["right"]
     }
   } else {
     if (yDiff > 0) {
-      player1.lastDirection = "up"
+      directions = ["up"]
     } else {
-      player1.lastDirection = "down"
+      directions = ["down"]
     }
   }
   /* reset values */
